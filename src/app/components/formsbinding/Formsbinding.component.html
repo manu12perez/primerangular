@@ -8,17 +8,22 @@
         <!-- LOS CONTROLES DE FORMULARIO DEBEN TENER UN ID DE ANGULAR COMO VALOR ngModel -->
         <!-- PARA INDICAR EL MODEL BINDING DEBEMOS HACERO CON LA SIGUIENTE SINTAXIS
           [(ngModel)]="mi modelo" -->
-        <input type="text" name="cajanombre" #cajanombre="ngModel" [(ngModel)]="user.nombre" /><br />
+        <input type="text" name="cajanombre" #cajanombre="ngModel" [(ngModel)]="user.nombre" required />
+        <span style="color:red" *ngIf="cajanombre.valid == false && cajanombre.touched">
+            El nombre es obligatorio
+        </span><br />
         <label>Apellido: </label>
         <input type="text" name="cajaapellido" #cajaapellido="ngModel" [(ngModel)]="user.apellido" /><br />
         <label>Edad: </label>
         <input type="number" name="cajaedad" #cajaedad="ngModel" [(ngModel)]="user.edad" /><br />
 
-        <button>Enviar datos</button>
+        <button [disabled]="!userForm.valid">
+            Enviar datos
+        </button>
     </form>
     <h2 style="color:blue">
-        Nombre: {{user.nombre}}, 
-        Apellido: {{user.apellido}}, 
+        Nombre: {{user.nombre}},
+        Apellido: {{user.apellido}},
         Edad: {{user.edad}},
     </h2>
 </div>
